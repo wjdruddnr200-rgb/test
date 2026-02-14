@@ -48,6 +48,10 @@ powershell -ExecutionPolicy Bypass -File .\scripts\build_windows_exe.ps1
 2. `Build Windows EXE` 워크플로우 실행 (`Run workflow`)
 3. 실행 완료 후 Artifacts에서 `flight-search-windows-exe` 다운로드
 
+## 릴리즈 페이지에 EXE 자동 첨부
+`Release`를 `Published` 상태로 생성하면 워크플로우가 자동으로 Windows EXE를 빌드하고,
+해당 릴리즈의 Assets에 `flight-search.exe`를 자동 첨부합니다.
+
 워크플로우 파일:
 - `.github/workflows/build-windows-exe.yml`
 

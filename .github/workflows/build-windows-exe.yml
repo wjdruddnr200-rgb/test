@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: ["work"]
+  release:
+    types: [published]
+
+permissions:
+  contents: write
 
 jobs:
   build-windows:
@@ -33,3 +38,11 @@ jobs:
         with:
           name: flight-search-windows-exe
           path: dist/flight-search.exe
+
+      - name: Attach EXE to Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/flight-search.exe
+          fail_on_unmatched_files: true
+          overwrite_files: true
