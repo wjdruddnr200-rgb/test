@@ -8,7 +8,7 @@
 - 최대 금액 필터 (`--max-price`)
 - 제공자별 결과 비교 (현재: 네이버 항공권, 스카이스캐너)
 
-## 설치
+## 설치 (개발/로컬 실행)
 ```bash
 python -m venv .venv
 source .venv/bin/activate
@@ -26,6 +26,30 @@ flight-search \
   --max-price 250000 \
   --currency KRW
 ```
+
+## Windows에서 EXE 만들기
+PowerShell에서 프로젝트 루트로 이동 후:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\build_windows_exe.ps1
+```
+
+빌드가 완료되면 아래 파일이 생성됩니다.
+- `dist\flight-search.exe`
+
+실행 예시:
+```powershell
+.\dist\flight-search.exe --origin ICN --destination NRT --date 2026-03-01 --earliest 09:00 --latest 14:00 --max-price 250000 --currency KRW
+```
+
+## 다운로드 가능한 EXE 만들기 (GitHub Actions)
+레포에 푸시한 뒤 GitHub에서:
+1. `Actions` 탭 이동
+2. `Build Windows EXE` 워크플로우 실행 (`Run workflow`)
+3. 실행 완료 후 Artifacts에서 `flight-search-windows-exe` 다운로드
+
+워크플로우 파일:
+- `.github/workflows/build-windows-exe.yml`
 
 ## 주의 사항
 - 네이버/스카이스캐너는 공식 공개 검색 API가 제한적이어서, 현재 구현은 HTML 파싱 기반입니다.
